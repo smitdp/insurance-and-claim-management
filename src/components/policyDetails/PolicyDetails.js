@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from './PolicyDetails.module.scss';
 import { baseURL } from '../../Server'
 import getCurrentUserId from '../../utils/getCurrentUserId'
 
 const PolicyDetails = () => {
+  const navigate = useNavigate();
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [agents, setAgents] = useState([]);
   const [selectedAgent, setSelectedAgent] = useState(null);
-  const [buyPolicyDetails, setBuyPolicyDetails] = useState({ userId: 0, policyId: 0, agentId: 0, enrollmentDate: "", endDate: "" });
+
   const location = useLocation();
   const policy = location.state.policy;
   const modalRef = useRef(null);
@@ -65,6 +66,8 @@ const PolicyDetails = () => {
         console.log("Policy purchase successful:", response.data);
         setModalIsVisible(false);
         alert("Policy purchase successful!");
+        navigate("/policies");
+
       } catch (error) {
         console.error("Error purchasing policy:", error);
         alert("Error purchasing policy. Please try again later.");
@@ -92,6 +95,7 @@ const PolicyDetails = () => {
             <p>Duration: {policy.duration}</p>
             <p>Installment: {policy.installment}</p>
             <p>Premium amount: {policy.premiumAmount}</p>
+          
             <button onClick={handleBuy}>Buy Policy</button>
           </div>
         ) : (
@@ -102,6 +106,8 @@ const PolicyDetails = () => {
         <div className={styles.modalOverlay} ref={modalRef}>
           <div className={styles.modalContent}>
             <h2>Select Agent</h2>
+            <p>Policy Number: {policy.policyNumber}</p>
+            <p>Policy Name: {policy.policyName}</p>
             <select onChange={handleAgentChange}>
               <option value="">Select Agent</option>
               {agents.map((agent) => (

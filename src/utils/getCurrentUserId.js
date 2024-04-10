@@ -2,9 +2,13 @@ import { jwtDecode } from "jwt-decode";
 
 const getCurrentUserId = () => {
     const token = localStorage.getItem("login");
-    const decodedToken = jwtDecode(token);
+    let decodedToken;
+    let id;
+    if(token){
+        decodedToken = jwtDecode(token);
+        id = decodedToken.nameid;
+    }
 
-    const id = decodedToken.nameid;
 
     return id;
 }

@@ -4,7 +4,6 @@ import axios from "axios";
 
 export const useUserInfo = (userId) => {
     const [information, setInformation] = useState({});
-
     useEffect(() => {
         if (userId) {
             const user = async () => {

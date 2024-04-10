@@ -12,9 +12,9 @@ const AppLayout = () => {
 
   return (
     <div>
-        {token===null && <LandingPage/>}
-        {(token !== null && information.information.roleName === "Claimant") && <UserHomePage/>}
-        {(token !== null && information.information.roleName === "Insurer") && <h1>Admin</h1>}
+        {!token ? <LandingPage/>:<p>HKJHKLJHKJ</p>}
+        {(token  && information.information.roleName === "Claimant") && <UserHomePage/>}
+        {(token  && information.information.roleName === "Insurer") && <h1>Admin</h1>}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import UserNav from "./components/UserNav";
 import Policies from "./components/Policies";
-import PolicyDetails from "./components/PolicyDetails";
+import PolicyDetails from "./components/policyDetails/PolicyDetails";
 import Login from "./components/Login";
 import UserHomePage from "./pages/UserHomePage";
 import AuthService from "./services/AuthService";
